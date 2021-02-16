@@ -6,11 +6,17 @@ get '/' do
   "Hello World"
 end
 
-get '/secret' do
-  "BadgerBadgerBadgerMushroomMushroom"
+get '/named-cat' do
+  p params
+  @name = params[:name]
+  erb(:index)
 end
 
-get '/cat' do
+get '/random-cat' do
   @name = ["Amigo", "Misty", "Almond"].sample
   erb(:index)
+end
+
+get '/secret' do
+  "BadgerBadgerBadgerMushroomMushroom"
 end
