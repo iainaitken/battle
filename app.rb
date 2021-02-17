@@ -1,26 +1,15 @@
-require 'sinatra'
+require 'sinatra/base'
 
-set :session_secret, 'super secret'
+class Battle < Sinatra::Base
+  get '/' do
+    erb :index
+  end
 
-get '/' do
-  "Hello World"
-end
+  post '/names' do
+    @player_1_name = params[:player_1_name]
+    @player_2_name = params[:player_2_name]
+    erb :play
+  end
 
-get '/cat-form' do
-  erb(:cat_form)
-end
-
-post '/named-cat' do
-  p params
-  @name = params[:name]
-  erb(:index)
-end
-
-get '/random-cat' do
-  @name = ["Amigo", "Misty", "Almond"].sample
-  erb(:index)
-end
-
-get '/secret' do
-  "BadgerBadgerBadgerMushroomMushroom"
+  run! if app_file == $0
 end
